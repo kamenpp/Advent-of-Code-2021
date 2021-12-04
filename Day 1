@@ -1,0 +1,27 @@
+text_file = open("/Users/kamen/Desktop/input.data", "r")
+lines = text_file.read().splitlines()
+text_file.close()
+
+# Part 1
+def getMeasurementIncrease(array):
+    i, j = 0, 1
+    count = 0
+    while j < len(array):
+        if int(array[i]) < int(array[j]):
+            count += 1
+        i += 1
+        j += 1
+    return count
+
+getMeasurementIncrease(lines)
+
+# Part 2
+def getWindowIncrease(array, n = 3):
+    array = list(map(int, array))
+    count = 0
+    for i in range(len(array) - n + 1):
+        if sum(array[i:i+n]) < sum(array[i+1:i+n+1]):
+            count += 1
+    return count
+    
+getWindowIncrease(lines, n = 3)
