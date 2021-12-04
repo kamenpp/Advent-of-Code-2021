@@ -1,2 +1,2 @@
 # Advent-of-Code-2021
-My first ever "coding project"
+My first ever coding challenge
