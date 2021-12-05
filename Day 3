@@ -1,0 +1,76 @@
+# Part I
+def getPowerConsumption(report):
+    report = list(map(str.split, open(report)))
+    for i in range(len(report)):
+        for j in report[i]:
+            report[i] = list(j)
+    gamma_rate = [0]*12
+    epsilon_rate = [0]*12
+    for j in range(12):
+        sum = 0
+        for i in range(len(report)):
+            sum += int(report[i][j])
+    #print(sum, len(report)//2)
+        if sum >= len(report)//2:
+            gamma_rate[j] = "1"
+            epsilon_rate[j] = "0"
+        else:
+            gamma_rate[j] = "0"
+            epsilon_rate[j] = "1"
+    decimal_eps = 0
+    for i in range(len(epsilon_rate)):
+        decimal_eps += int(epsilon_rate[i])*(2**(len(epsilon_rate) - i - 1))
+    decimal_gamma = 0
+    for i in range(len(gamma_rate)):
+        decimal_gamma += int(gamma_rate[i])*(2**(len(gamma_rate) - i - 1))
+    return decimal_gamma*decimal_eps
+    
+getPowerConsumption('/Users/kamen/Desktop/2021.3.data')
+    
+# Part II
+def getLifeSupportRating(report):
+    co2report = o2report = open(report, "r").read().split()
+    bit = 0
+    num_of_zeros = 0
+    num_of_ones = 0
+    binary = ""
+    co2binary = ""
+
+    while bit < 12:
+        for i in o2report:
+            if i[bit] == "0":
+                num_of_zeros += 1
+            elif i[bit] == "1":
+                num_of_ones += 1
+        if num_of_zeros > num_of_ones:
+            binary += "0"
+        elif num_of_ones > num_of_zeros or num_of_ones == num_of_zeros:
+            binary += "1"
+        if len(o2report) > 1:
+            o2report = [x for x in o2report if x.startswith(binary)]
+        num_of_zeros = 0
+        num_of_ones = 0
+        bit += 1
+
+    bit = 0
+    while bit < 12:
+    #temp = []
+        for i in co2report:
+            if i[bit] == "0":
+                num_of_zeros += 1
+            elif i[bit] == "1":
+                num_of_ones += 1
+        if num_of_zeros > num_of_ones:
+            co2binary += "1"
+        elif num_of_ones > num_of_zeros or num_of_ones == num_of_zeros:
+            co2binary += "0"
+        if len(co2report) > 1:
+            co2report = [x for x in co2report if x.startswith(co2binary)]
+        num_of_zeros = 0
+        num_of_ones = 0
+        bit += 1
+
+    lifesupportrating = int(Binary[0], 2) * int(co2binarylist[0], 2)
+    return lifesupportrating
+    
+getLifeSupportRating('/Users/kamen/Desktop/2021.3.data')
