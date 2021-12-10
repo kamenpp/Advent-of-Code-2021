@@ -1,3 +1,4 @@
+# Part I
 def getIntersections(input_data): 
     raw_coord = open(input_data).read().split()
     for i in raw_coord:
