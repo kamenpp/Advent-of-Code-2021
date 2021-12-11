@@ -1,0 +1,41 @@
+# Part I
+
+lanternfish = {}
+file = open('input').read().strip().split(',')  # input goes here
+for key,value in enumerate(file):
+    lanternfish[key] = int(value)
+    
+k = 0
+while k < 80:
+    new = 0
+    for key in lanternfish:
+        if lanternfish[key] == 0:
+            lanternfish[key] = 6
+            new += 1
+        else:
+            lanternfish[key] -= 1
+    k += 1
+    while new > 0:
+        j = len(lanternfish)
+        lanternfish[j] = 8
+        new -= 1
+len(lanternfish)        
+        
+# Part II
+
+from collections import Counter
+counter = Counter(file)
+# Note that keys are strings by default
+day = 0
+while day < 256:
+    temp = counter[str(0)]
+    for key in range(1,9):    
+        counter[str(key-1)] = counter[str(key)]
+    
+    counter[str(8)] = temp
+    counter[str(6)] += temp
+    day += 1
+number = 0
+for key in range(9):
+    number += counter[str(key)]
+number
