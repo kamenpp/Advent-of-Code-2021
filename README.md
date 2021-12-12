@@ -12,4 +12,4 @@ Day 5 - got help (didn't know how to use a dictionary with tuples as keys, part 
 
 Day 6 - I liked it.
 
-Day 7 - didn't even need to determine the exact horizontal value to get the fuel in part 1.
+Day 7 - didn't even need to determine the exact horizontal value to get the fuel.
