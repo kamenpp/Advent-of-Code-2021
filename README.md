@@ -7,5 +7,9 @@ I will be attempting to get all stars, but bearing in mind my coding skills, thi
 
 I will also post my progress on this file:
 Days 1, 2, 3 were relatively easy, and without too much trouble or help I was able to find a solution (which is far from being optimal but I am happy to have done it by myself). These got me very excited.
+
 Day 5 - got help (didn't know how to use a dictionary with tuples as keys, part 1 only).
+
 Day 6 - I liked it.
+
+Day 7 - didn't even need to determine the exact horizontal value to get the fuel in part 1.
