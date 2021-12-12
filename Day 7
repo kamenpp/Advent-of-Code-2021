@@ -1,0 +1,37 @@
+# Part I
+
+file = open('input for day 7').read().strip().split(',')
+values = [int(value) for value in file]
+mean = sum(values)//len(values) # get this mean value so that a rough estimate can be obtained
+
+# get a rough estimate of the fuel needed (could also do it by finding the median, but this needs either more code or statistics library)
+fuel = 0
+for value in values:
+    fuel += abs(value - mean)
+for i in range(min(values), max(values) + 1):
+    temp = 0
+    for value in values:
+        temp += abs(value - i)
+    if temp < fuel:
+        fuel = temp
+fuel
+
+# Part II
+
+list_of_differences = [1] # this list contains the aritmethic progression for calculating the fuel
+while len(list_of_differences) < max(values):
+    list_of_differences.append(list_of_differences[-1] + 1) 
+    
+# again get a high estimate of the fuel
+fuel = 0
+for value in values:
+    fuel += (abs(value - mean)*abs(value - mean - 1)) // 2 # this is the formula that will get the sum, without the need for the list 
+
+# the following line take a couple of seconds to run (the runtime will be shorter if the formula for arithmetic progression is used instead, as above)
+for i in range(min(values), max(values) + 1):
+    temp = 0
+    for value in values:
+        temp += sum(list_of_differences[0:abs(value - i)])
+    if temp < fuel:
+        fuel = temp        
+fuel
