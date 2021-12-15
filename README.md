@@ -13,4 +13,4 @@ Day 6 - I liked it.
 
 Day 7 - didn't even need to determine the exact horizontal value to get the fuel.
 
-Day 8 - not too hard to create the algorithm, but a bit fiddly to implement. Otherwise, I really enjoyed it.
+Day 8 - not too hard to create the algorithm but a bit fiddly to implement. Otherwise, I really enjoyed it.
