@@ -1,5 +1,4 @@
 # Advent-of-Code-2021
-My first ever coding challenge
 
 I decided to participate because I love problem-solving and because I need to practice more. I am very new to coding still, but I want to do this in future and have a great desire to learn, so I thought that the best way to learn is by practice.
 
@@ -13,3 +12,5 @@ Day 5 - got help (didn't know how to use a dictionary with tuples as keys, part 
 Day 6 - I liked it.
 
 Day 7 - didn't even need to determine the exact horizontal value to get the fuel.
+
+Day 8 - not too hard to create the algorithm, but a bit fiddly to implement. Otherwise, I really enjoyed it.
