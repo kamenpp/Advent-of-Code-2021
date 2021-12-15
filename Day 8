@@ -1,0 +1,95 @@
+# Part I
+lines = open('input').read().split("\n") # insert input file
+clear_input = [line.split(' | ') for line in lines]
+
+count = 0
+for i in range(len(clear_input)-1):  # the last value here is bad
+    digits = clear_input[i][1].split(' ')
+    for digit in digits:
+        if len(digit) == 2 or len(digit) == 4 or len(digit) == 3 or len(digit) == 7:
+            count += 1
+count
+
+# Part II
+
+''' My Ideas
+  0, 6 and 9 have the same number of characters 6
+  2, 3, 5 have the same number of charaters 5
+  (el)if a digit containns the characters of 4, then it must be 9
+  (el)if a digit contains the charaters that 7 does, it is 3, 9, or 0 (in elif statement 9 will not be here)
+        if len(digit) == 6:
+               it is 0
+        if len(digit) == 5:
+               if is 3
+  we are left with the digits 6, 2 and 5
+  hence elif len(digit) == 6
+           it is  6
+   4 - 1 leaves two characters, if they are both present in the digit, it must be 5
+    else it is a 2
+'''
+
+summation = 0
+for i in range(len(clear_input)-1):
+    dict = {}
+    signal = clear_input[i][0].split(' ')
+    digits = clear_input[i][1].split(' ')
+    for digit in signal:
+        if len(digit) == 2:
+            dict[1] = digit
+        elif len(digit) == 4:
+            dict[4] = digit            
+        elif len(digit) == 3:
+            dict[7] = digit            
+        elif len(digit) == 7:
+            dict[8] = digit
+    signal.remove(dict[1])
+    signal.remove(dict[4])
+    signal.remove(dict[7])
+    signal.remove(dict[8])
+    
+    for digit in signal:
+        if all(characters in digit for characters in dict[4]):
+            dict[9] = digit        
+        elif all(characters in digit for characters in dict[7]):
+            if len(digit) == 6:
+                dict[0] = digit
+            elif len(digit) == 5:
+                dict[3] = digit
+        elif len(digit) == 6:
+            dict[6] = digit
+    signal.remove(dict[9])
+    signal.remove(dict[0])
+    signal.remove(dict[3])
+    signal.remove(dict[6])
+    
+    for digit in signal:
+        if any((characters in dict[8] and characters not in dict[6]) for characters in digit):
+            dict[2] = digit
+        else:
+            dict[5] = digit
+            
+    value = ''
+    for digit in digits:
+        if len(digit) == 2:
+            value += '1'
+        elif len(digit) == 4:
+            value += '4'
+        elif len(digit) == 3:
+            value += '7'
+        elif len(digit) == 7:
+            value += '8'
+        elif all(characters in digit for characters in dict[4]):
+            value += '9'
+        elif all(characters in digit for characters in dict[7]):
+            if len(digit) == 6:
+                value += '0'
+            elif len(digit) == 5:
+                value += '3'
+        elif len(digit) == 6:
+            value += '6'
+        elif any((characters in dict[8] and characters not in dict[6]) for characters in digit):
+            value += '2'
+        else:
+            value += '5'
+    summation += int(value)
+summation
