@@ -1,0 +1,81 @@
+# Part I -- Left the ugly way I did it
+
+lines = open('/Users/kamen/Desktop/2021.9.data').read().split()
+characters = [list(line) for line in lines]
+integers = []
+for i in range(len(characters)):
+    integers.append([int(character) for character in characters[i]])
+    
+    
+low_points = []
+location_of_low_points = {}
+count = 0
+directions = [[1,0],[-1, 0],[0,1],[0,-1]]
+for i in range(len(integers)):
+    for j in range(len(integers[i])):
+        surrounding = {}
+        for di,dj in directions:
+            row,col = i+di, j+dj
+            if (row < len(integers) and row >= 0 and
+                col < len(integers[0]) and col >= 0):
+                surrounding[(row, col)] = integers[row][col]
+        count = 0
+        for integer in surrounding:
+            if integers[i][j] < surrounding[integer]:
+                count += 1
+            else:
+                break
+        if count == len(surrounding):
+            low_points.append(integers[i][j])
+            location_of_low_points[(i,j)] = (i,j) ## this is for the alternative solution to part II 
+ print(sum(low_points) + len(surrounding))
+ 
+# Part II
+visited = set()
+basins = []
+def bfs(r,c):
+    q = deque()
+    basin_size = 1
+    visited.add((r,c))
+    directions = [[1,0],[-1, 0],[0,1],[0,-1]] #down, up, right, left
+    q.append((r,c))
+    while q:
+        row, col = q.popleft()
+        for dr, dc in directions:
+            r, c = row + dr, col + dc
+            if (r in range(len(integers)) and 
+                c in range(len(integers[0])) and
+                integers[r][c] != 9 and
+                (r,c) not in visited):
+                    q.append((r,c))
+                    visited.add((r,c))
+                    basin_size += 1
+    return basins.append(basin_size)
+  for (r,c) in location_of_low_points:
+    bfs(r,c)
+basins.sort()
+print(basins[-1]*basins[-2]*basins[-3])
+
+###or alternatively for Part II
+visited = set()
+basins = []
+for (r,c) in location_of_low_points:
+    q = deque()
+    basin_size = 1
+    visited.add((r,c))
+    directions = [[1,0],[-1, 0],[0,1],[0,-1]] #down, up, right, left
+    q.append((r,c))
+    while q:
+        row, col = q.popleft()
+        for dr, dc in directions:
+            r, c = row + dr, col + dc
+            if (r in range(len(integers)) and 
+                c in range(len(integers[0])) and
+                integers[r][c] != 9 and
+                (r,c) not in visited):
+                    q.append((r,c))
+                    visited.add((r,c))
+                    basin_size += 1
+    basins.append(basin_size)
+basins.sort()
+print(basins[-1]*basins[-2]*basins[-3])
