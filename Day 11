@@ -20,7 +20,7 @@ while step < 101:
                 q.append((i,j))
                 flashed.add((i,j))
     while q:
-        for item in list(q):
+        for item in list(q):  # needs to first be in a list because otherwise we'll get an error for mutating q in the iteration
             i,j = q.popleft()
             for di, dj in directions:
                 row, col = i + di, j+dj
