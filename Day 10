@@ -1,0 +1,85 @@
+# Part I
+input_array = open('input here').read().split()
+opening_char = ['(','[','{','<']
+closing_char = [')',']','}','>']
+
+def helper(string):
+    for character in string:
+        if character in opening_char:
+            q.append(character)
+        else:
+            last = q.pop()
+            for i in range(len(opening_char)):
+                if opening_char[i] != last: #and closing_char[i] == character:
+                   continue
+                else:
+                    if closing_char[i] != character:
+                        return character
+                        # perhaps drop the line from the input
+                     # if it is the correct closing character
+                    else:
+                        break # from the inner loop and because the character has been popped, we just lose it
+errors = []
+for string in input_array:
+    q = deque()
+    errors.append(helper(string))
+score = 0
+for i in errors:
+    if i == ')':
+        score += 3
+    elif i == ']':
+        score += 57
+    elif i == '}':
+        score += 1197
+    elif i == '>':
+        score += 25137
+print(score)
+ 
+# Part II
+i = 0
+while i < len(errors):
+    if errors[i] != None:
+        del input_array[i]
+        del errors[i]
+    else:
+        i += 1
+
+def completionString(string):
+    closing = []
+    q = deque()
+    for character in string:
+        if character in opening_char:
+            q.append(character)
+        else:
+            q.pop()
+    # now there is no need to find bad characters, just determine the what closing character are needed for the rrest in the queue
+    while q:
+        last = q.pop()
+        for i in range(len(opening_char)):
+            if opening_char[i] != last: #and closing_char[i] == character:
+                continue
+            else:
+                closing.append(closing_char[i])
+    return closing
+completions = []
+for string in input_array:
+    completions.append(completionString(string))
+score_array = []
+for r in range(len(completions)):
+    score = 0
+    for c in range(len(completions[r])):
+            if completions[r][c] == ')':
+                score *= 5
+                score += 1
+            elif completions[r][c] == ']':
+                score *= 5
+                score += 2
+            elif completions[r][c] == '}':
+                score *= 5
+                score += 3
+            elif completions[r][c] == '>':
+                score *= 5
+                score += 4
+    score_array.append(score)
+score_array.sort()
+print(score_array[(len(score_array)//2)])    
