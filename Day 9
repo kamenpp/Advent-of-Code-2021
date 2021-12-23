@@ -1,6 +1,6 @@
 # Part I -- Left the ugly way I did it
 
-lines = open('/Users/kamen/Desktop/2021.9.data').read().split()
+lines = open('input goes here').read().split()
 characters = [list(line) for line in lines]
 integers = []
 for i in range(len(characters)):
