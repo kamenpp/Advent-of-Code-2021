@@ -1,4 +1,4 @@
-# Part I -- Left the ugly way I did it
+# Part I
 
 lines = open('input goes here').read().split()
 characters = [list(line) for line in lines]
