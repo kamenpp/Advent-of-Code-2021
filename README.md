@@ -16,6 +16,6 @@ Day 7 - didn't even need to determine the exact horizontal value to get the fuel
 
 Day 8 - not too hard to create the algorithm but a bit fiddly to implement. Otherwise, I really enjoyed it.
 
-Day 9 - I learned what bfs is and how it is supposed to be implemented.
+Day 9 - I learnt what bfs is and how it is supposed to be implemented.
 
 Day 10, 11 - not too hard after day 9.
