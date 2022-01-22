@@ -1,0 +1,69 @@
+from collections import Counter
+template = 'VFHKKOKKCPBONFHNPHPN'  # insert your own template here
+rules = open('file').read().split('\n') # your file must contain the rules only (not the template)
+rules.remove('') # a line that could have been striped in the above line
+
+# Part 1
+dict = {}
+for line in rules:
+    left, right = line.split(' -> ')
+    dict[left] = right
+word = {}
+for key,letter in enumerate(template):
+    word[key] = letter
+    
+k = 1
+while k <= 10:
+    i,j = 0,1
+    while j < len(word):
+        code = word[i] + word[j]
+        letter = dict[code]
+        word[i] += letter
+        i += 1
+        j += 1
+    new_string = ''
+    for key,char in word.items():
+        new_string += char
+    word = {}
+    for key,letter in enumerate(new_string):
+        word[key] = letter
+    k += 1
+
+count = Counter(new_string)
+minVal, maxVal = 0,0
+for key,value in count.items():
+    maxVal = max(value, maxVal)
+    if minVal == 0:
+        minVal = value
+    minVal = min(value, minVal)
+
+print(maxVal - minVal) # answer to part 1
+
+# For part 2 I needed to adopt a whole new approach, which in retrospect is also better for part 1, but decided to leave that as it was originally.
+count1 = Counter()
+for i in range(len(template) -1):
+    count1[template[i:i+2]] += 1
+    
+for _ in range(40):
+    count2 = Counter()
+    for key, value in count1.items():
+        prev_count = count1
+        count2[key[0]+dict[key]] += count1[key]
+        count2[dict[key] + key[1]] += count1[key]
+    count1 = count2
+
+letter_count = Counter()
+for key, value in prev_count.items():
+    letter_count[key[0]] += value
+    letter_count[dict[key]] += value
+letter_count[template[-1]] += 1  # need to account for the last letter
+# which is the only one that does not appear as a first letter in the combinations, and thus was not added together with the others
+
+minVal, maxVal = 0,0
+for key,value in letter_count.items():
+    maxVal = max(value, maxVal)
+    if minVal == 0:
+        minVal = value
+    minVal = min(value, minVal)
+
+print(maxVal - minVal)  # answer to part 2
