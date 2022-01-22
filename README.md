@@ -19,3 +19,5 @@ Day 8 - not too hard to create the algorithm but a bit fiddly to implement. Othe
 Day 9 - I learnt what bfs is and how it is supposed to be implemented.
 
 Day 10, 11 - not too hard after day 9.
+
+Day 14 - the approach that one has to take for part 2 is quite clever.
